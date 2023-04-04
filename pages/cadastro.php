@@ -4,7 +4,7 @@ include_once("../pages/functions/php/functions.php")
 
 <!DOCTYPE html>
 <html lang="pt-br">
-<title>Comercial</title>
+<title>Estoque</title>
 
 <head>
     <?php
@@ -24,7 +24,7 @@ include_once("../pages/functions/php/functions.php")
         </div>
         <div class="row">
             <div class="col-sm-8">
-                <h1 class="display-6">Comercial</h1>
+                <h1 class="display-6">Estoque</h1>
             </div>
             <div class="col-sm-4">
                 <h2 class="display-6">Bem vindo, <?php echo $_SESSION['nome']; ?>.</h2>
@@ -59,18 +59,20 @@ include_once("../pages/functions/php/functions.php")
                 ?>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-10">
+                <a href="./API/views/cadastro.php"><button type="button" class="btn btn-success">Cadastrar
+                        Estoque</button></a>
+                <hr>
+            </div>
+        </div>
         <?php
         require_once("./API/model/estoque.php");
         $listar = new Estoque();
         if ($retorno = $listar->listarTodosClientes())
             $dados = json_decode($retorno);
 
-        require_once("./API/model/preparo.php");
-        $listar2 = new Preparo();
-        if ($retorno = $listar2->listarTodosClientes())
-            $dados2 = json_decode($retorno);
-
-        if (isset($dados) && !empty($dados) || isset($dados2) && !empty($dados2)) {
+        if (isset($dados) && !empty($dados)) {
         ?>
             <div class="row">
                 <div class="col-sm-12 border border-secondary">
@@ -87,6 +89,7 @@ include_once("../pages/functions/php/functions.php")
                                 <th scope="col">Nome</th>
                                 <th scope="col">Categoria</th>
                                 <th scope="col">Preço</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">AÇÕES</th>
                             </tr>
                         </thead>
@@ -97,33 +100,43 @@ include_once("../pages/functions/php/functions.php")
                             ?>
                                 <tr>
                                     <th scope="row"><?= $i++; ?></td>
-                                    <td><?= substr_replace($value->name, (strlen($value->name) > 30 ? '...' : ''), 30); ?></td>
-                                    <td><?= substr_replace($value->categoria, (strlen($value->categoria) > 30 ? '...' : ''), 30);; ?></td>
+                                    <td><?= substr_replace($value->name, (strlen($value->name) > 30 ? '...' : ''),30);?></td>
+                                    <td><?= substr_replace($value->categoria, (strlen($value->categoria) > 30 ? '...' : ''),30); ?></td>
                                     <td>R$ <?= number_format($value->preco, '2', ',', '.'); ?></td>
-                                    <td><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#adicionar<?= $value->id; ?>">Adicionar ao Carrinho</button>
-                                        <a href="./API/views/estoque.php?id=<?= $value->id; ?>&acao=buscar"><button type="button" class="btn btn-warning btn-sm">Visualizar/Editar</button></a>
+                                    <td><?= $value->status; ?></td>
+                                    <td><a href="./API/views/estoque.php?id=<?= $value->id; ?>&acao=buscar"><button type="button" class="btn btn-warning btn-sm">Visualizar/Editar</button></a>
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#excluir<?= $value->id; ?>">Excluir</button>
                                     </td>
                                 </tr>
-                                <?php
-                                foreach ($dados2 as $key => $value) {
-                                ?>
-                                    <tr>
-                                        <th scope="row"><?= $i++; ?></td>
-                                        <td><?= $value->name; ?></td>
-                                        <td><?= $value->categoria; ?></td>
-                                        <td>R$ <?= number_format($value->preco, '2', ',', '.'); ?></td>
-                                        <td><a href="?adicionar?id=<?= $value->id; ?>&acao=buscar"><button type="button" class="btn btn-success btn-sm">Adicionar ao Carrinho</button></a>
-                                            <a href="./API/views/preparo.php?id=<?= $value->id; ?>&acao=buscar"><button type="button" class="btn btn-warning btn-sm">Visualizar/Editar</button></a>
-                                        </td>
-                                    </tr>
+                                <!-- Modal -->
+                                <div class="modal fade" id="excluir<?= $value->id; ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="TituloModalCentralizado">Excluir Estoque</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Deseja realmente excluir do estoque
+                                                <b><?= $value->name; ?>?</b>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="./API/controller/estoque.php?id=<?= $value->id; ?>&acao=excluir"><button type="button" class="btn btn-danger btn-sm">Sim</button></a>
+                                                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Não</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php
-                                }
                             }
                             ?>
                         </tbody>
                     </table>
                 </div>
             </div>
+
         <?php
         } else {
         ?>

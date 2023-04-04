@@ -9,11 +9,13 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
     <?php
     headFormulario();
     ?>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css">
 </head>
 
 <body>
     <?php
-    menu(); 
+    menu();
     ?>
     <div class="container">
         <div class="row">
@@ -25,16 +27,22 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
             <div class="col-sm-12">
                 <?php
                 if (!$_GET) {
-                    echo "<h3>Cadastrar Preparo</h3>";
+                    echo "<h3>Cadastro</h3>";
                     $dadosPadrao = json_encode(
                         array(
                             0 => array(
-                                "name" => "",
-                                "categoria" => "",
-                                "texto" => "",
-                                "mo" => "",
+                                "nome" => "",
+                                "telefone" => "",
+                                "servico" => "",
                                 "preco" => "",
+                                "barbeiro" => "",
+                                "data" => "",
+                                "horario" => "",
+                                "texto" => "",
+                                "preco" => "",
+                                "precoMedio" => "",
                                 "status" => "",
+                                "fornecedor" => "",
                                 "created_at" => "",
                                 "update_at" => "",
                                 "id" => "",
@@ -44,10 +52,10 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
                     $dados = json_decode($dadosPadrao);
                 } else {
                     if (isset($_GET["id"]) && !empty($_GET["id"])) {
-                        echo "<h3>Editar Preparo</h3>";
-                        require_once("../model/preparo.php");
+                        echo "<h3>Agendamento de horário</h3>";
+                        require_once("../model/estoque.php");
                         $id = filter_input(INPUT_GET, "id", FILTER_DEFAULT);
-                        $buscarCliente = new Preparo();
+                        $buscarCliente = new Estoque();
                         $resposta = $buscarCliente->carregarCliente($id);
                         $dados = json_decode($resposta);
                     }
@@ -62,7 +70,7 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="TituloModalCentralizado">Excluir Preparo</h5>
+                                <h5 class="modal-title" id="TituloModalCentralizado">Excluir Estoque</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -71,7 +79,7 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
                                 erro
                             </div>
                             <div class="modal-footer">
-                                <a href="./API/controller/preparo.php?id=<?= $value->id; ?>&acao=excluir"><button type="button" class="btn btn-danger btn-sm">Sim</button></a>
+                                <a href="./API/controller/estoque.php?id=<?= $value->id; ?>&acao=excluir"><button type="button" class="btn btn-danger btn-sm">Sim</button></a>
                                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Não</button>
                             </div>
                         </div>
@@ -84,54 +92,80 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
             foreach ($dados as $key => $value)
             ?>
             <div class="col-sm-12">
-                <form action="../controller/preparo.php" method="POST">
+                <form action="../controller/estoque.php" method="POST">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <div class="form-group">
                                 <label>Nome</label>
-                                <input type="text" class="form-control" name="name" id="name" value="<?= $value->name; ?>" required>
+                                <input type="text" class="form-control" name="nome" id="nome" value="<?= $value->nome; ?>" required>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label>Categoria</label>
-                                <input type="text" class="form-control" name="categoria" id="categoria" value="<?= $value->categoria; ?>">
+                                <label>Telefone para Contato</label>
+                                <input type="text" class="form-control phone_with_ddd" name="telefone" id="telefone" value="<?= $value->telefone; ?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Tipo de Serviço</label>
+                                <select class="form-control" name="servico" id="servico" onchange="document.getElementById('preco').value = this.value;">
+                                    <option selected disabled> Selecione um Serviço</option>
+                                    <option name="corte" id="corte" value="9900">Corte</option>
+                                    <option name="barba" id="barba" value="barba">Barba</option>
+                                    <option id="corte_barba" value="corte_barba">Corte + Barba</option>
+                                    <option id="luzes" value="luzes">Luzes</option>
+                                    <option id="hidratacao" value="hidratacao">Hidratação</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Preço</label>
+                                <input id="preco" class="form-control money" type="text" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Barbeiro</label>
+                                <select class="form-control" name="status" id="status">
+                                    <option name="status" id="status" selected style="display:none"><?= $value->barbeiro; ?></option>
+                                    <option name="status" id="status" value="<?= $value->barbeiro = 'OK'; ?>">Patrick</option>
+                                    <option name="status" id="status" value="<?= $value->barbeiro = 'Em Falta'; ?>">João</option>
+                                </select>
+                                <!--<input type="text" class="form-control" name="status" id="status" value="">-->
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Horário</label>
+                                <input type="text" class="form-control horario" name="horario" id="horario" value="<?= $value->horario; ?>">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-10">
-                            <label>Receita</label>
+                            <label>Observações</label>
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="Faça um comentário aqui." name="texto" id="texto" style="height: 200px"><?= $value->texto; ?></textarea>
-                                <label for="texto">Faça um comentário aqui.</label>
+                                <textarea class="form-control" name="texto" id="texto" style="height: 200px"><?= $value->texto; ?></textarea>
+                                <label for="texto">Faça um comentário aqui:</label>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Valor da Mão de Obra</label>
-                                <input type="text" class="form-control money" name="mo" id="mo" value="<?= $value->mo; ?>">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Preço dos Insumos</label>
-                                <input type="text" class="form-control money" name="preco" id="preco" value="<?= $value->preco; ?>">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Status</label>
+                                <label>status</label>
                                 <select class="form-control" name="status" id="status">
                                     <option name="status" id="status" selected style="display:none"><?= $value->status; ?></option>
-                                    <option name="status" id="status" value="<?= $value->status = 'OK'; ?>">OK</option>
-                                    <option name="status" id="status" value="<?= $value->status = 'Em Falta'; ?>">Em Falta</option>
+                                    <option name="status" id="status" value="<?= $value->status = 'agendado'; ?>">Agendado</option>
+                                    <option name="status" id="status" value="<?= $value->status = 'cancelado'; ?>">Cancelado</option>
+                                    <option name="status" id="status" value="<?= $value->status = 'realizado'; ?>">Realizado</option>
                                 </select>
-                                <!--<input type="text" class="form-control" name="status" id="status" value="">-->
                             </div>
                         </div>
                     </div>
@@ -169,7 +203,7 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
                             <?php
                             }
                             ?>
-                            <a href="../../preparo.php" class="btn btn-danger">Cancelar</a>
+                            <a href="../../estoque.php" class="btn btn-danger">Cancelar</a>
                         </div>
                     </div>
                 </form>
@@ -179,6 +213,15 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
     <?php
     rodapeFormulario();
     ?>
+    <script src="../../functions/js/functions.js">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/build/jquery.datetimepicker.full.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/jquery.datetimepicker.min.css">
 </body>
 
 </html>

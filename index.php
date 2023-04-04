@@ -64,7 +64,7 @@
                 $_SESSION['id'] = $usuario['id'];
                 $_SESSION['nome'] = $usuario['nome'];
 
-                header("Location: pages/funcionarios.php");
+                header("Location: pages/cadastro.php");
             } else {
                 echo "Falha ao logar! E-mail ou senha incorretos";
             }

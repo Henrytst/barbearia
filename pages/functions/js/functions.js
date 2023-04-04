@@ -7,7 +7,7 @@ function formata(data) {
   return `${data.getFullYear()}-${pad(data.getMonth() + 1)}-${pad(data.getDate())}`;
 }
 
-const campo = document.querySelector('#campoData');
+const campo = document.querySelector('#horario');
 
 window.addEventListener('DOMContentLoaded', function () {
   var data = new Date(); // data de hoje
@@ -31,19 +31,13 @@ campo.addEventListener('invalid', () => {
 
 $(function () {
   jQuery.datetimepicker.setLocale('pt-BR');
-  $('.timepicker').datetimepicker({
-    beforeShowDay: function(date) {
-      var day = date.getDay();
-      return [(day != 0 && day != 6)];},
+  $('.horario').datetimepicker({
     format: 'd/m/Y H:i',
-    minDate: '11-11-2020',
     allowTimes: ['10:00', '10:30', '11:00', '11:30', '12:00',
-      '02:30', '3:00', '3:30', '04:00', '04:30', '05:00', '05:30', '06:00', '06:30'],
-    defaultDate: "01/12/2013",
-    disabledDates: [
-      moment("2023/04/21"),
-      new Date(2023, 04, 21),
-      "2023/04/30 00:53"
-    ],
+      '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30'],
+    beforeShowDay: function (date) {
+      var day = date.getDay();
+      return [(day != 0 && day != 1)];
+    }
   });
 });
