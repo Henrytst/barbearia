@@ -8,4 +8,4 @@ $objMigration->slqCreateSchema();
 $objCreateTable = new CreateTable();
 $objCreateTable->CreateTable();
 
-header('location: ../funcionarios.php ');
+header('location: ../cadastro.php ');

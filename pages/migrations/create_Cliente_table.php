@@ -5,24 +5,17 @@ class CreateTable
     public function CreateTable()
     {
         try {
-            $pdo = new PDO("mysql:host=localhost;dbname=SHAKERS", "root", "");
+            $pdo = new PDO("mysql:host=localhost;dbname=BARBEARIA", "root", "");
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $slqCreateTable = 'CREATE TABLE funcionarios(
+            $slqCreateTable = 'CREATE TABLE cadastro(
                 id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                arquivo varchar(255) NOT NULL,
-                nome_arquivo varchar(255) NOT NULL,
-                name varchar(255) NOT NULL,
-                email varchar(255) NOT NULL,
-                rg varchar(255) NOT NULL,
-                cpf varchar(255) NOT NULL,
-                cb varchar(255) NOT NULL,
-                phone varchar(50) DEFAULT NULL,
-                manequim varchar(255) NOT NULL,
-                calcado varchar(255) NOT NULL,
-                altura varchar(255) NOT NULL,
+                nome varchar(255) NOT NULL,
+                telefone varchar(50) DEFAULT NULL,
+                servico varchar(255) NOT NULL,
+                barbeiro varchar(255) NOT NULL,
+                horario varchar(255) NOT NULL,
+                texto varchar(255) DEFAULT NULL,
                 status varchar(255) DEFAULT NULL,
-                hierarquia varchar(255) DEFAULT NULL,
-                idiomas varchar(255) DEFAULT NULL,
                 created_at varchar(255) DEFAULT NULL,
                 update_at varchar(255) DEFAULT NULL
             )';
@@ -30,7 +23,7 @@ class CreateTable
             $stmt = $pdo->prepare($slqCreateTable);
             $stmt->execute();
 
-            $pdo = new PDO("mysql:host=localhost;dbname=SHAKERS", "root", "");
+           /* $pdo = new PDO("mysql:host=localhost;dbname=BARBEARIA", "root", "");
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $slqCreateTable = 'CREATE TABLE fornecedor(
                 id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -45,7 +38,7 @@ class CreateTable
             $stmt = $pdo->prepare($slqCreateTable);
             $stmt->execute();
 
-            $pdo = new PDO("mysql:host=localhost;dbname=SHAKERS", "root", "");
+            $pdo = new PDO("mysql:host=localhost;dbname=BARBEARIA", "root", "");
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $slqCreateTable = 'CREATE TABLE estoque(
                 id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -65,7 +58,7 @@ class CreateTable
             $stmt = $pdo->prepare($slqCreateTable);
             $stmt->execute();
 
-            $pdo = new PDO("mysql:host=localhost;dbname=SHAKERS", "root", "");
+            $pdo = new PDO("mysql:host=localhost;dbname=BARBEARIA", "root", "");
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $slqCreateTable = 'CREATE TABLE preparo(
                 id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -82,7 +75,7 @@ class CreateTable
             $stmt = $pdo->prepare($slqCreateTable);
             $stmt->execute();
 
-            $pdo = new PDO("mysql:host=localhost;dbname=SHAKERS", "root", "");
+            $pdo = new PDO("mysql:host=localhost;dbname=BARBEARIA", "root", "");
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $slqCreateTable = 'CREATE TABLE cliente(
                 id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -98,7 +91,7 @@ class CreateTable
             )';
 
             $stmt = $pdo->prepare($slqCreateTable);
-            $stmt->execute();
+            $stmt->execute();*/
             
         } catch (PDOException $e) {
             echo 'Error: ' . $e->getMessage();

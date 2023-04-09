@@ -1,5 +1,5 @@
 <?php
-include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
+include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php")
 ?>
 
 <!DOCTYPE html>
@@ -9,11 +9,10 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
     <?php
     headFormulario();
     ?>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css">
 </head>
 
 <body>
+
     <?php
     menu();
     ?>
@@ -34,15 +33,10 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
                                 "nome" => "",
                                 "telefone" => "",
                                 "servico" => "",
-                                "preco" => "",
                                 "barbeiro" => "",
-                                "data" => "",
                                 "horario" => "",
                                 "texto" => "",
-                                "preco" => "",
-                                "precoMedio" => "",
                                 "status" => "",
-                                "fornecedor" => "",
                                 "created_at" => "",
                                 "update_at" => "",
                                 "id" => "",
@@ -53,9 +47,9 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
                 } else {
                     if (isset($_GET["id"]) && !empty($_GET["id"])) {
                         echo "<h3>Agendamento de horário</h3>";
-                        require_once("../model/estoque.php");
+                        require_once("../model/cadastro.php");
                         $id = filter_input(INPUT_GET, "id", FILTER_DEFAULT);
-                        $buscarCliente = new Estoque();
+                        $buscarCliente = new Cadastro();
                         $resposta = $buscarCliente->carregarCliente($id);
                         $dados = json_decode($resposta);
                     }
@@ -70,7 +64,7 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="TituloModalCentralizado">Excluir Estoque</h5>
+                                <h5 class="modal-title" id="TituloModalCentralizado">Excluir Cadastro</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -79,7 +73,7 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
                                 erro
                             </div>
                             <div class="modal-footer">
-                                <a href="./API/controller/estoque.php?id=<?= $value->id; ?>&acao=excluir"><button type="button" class="btn btn-danger btn-sm">Sim</button></a>
+                                <a href="./API/controller/cadastro.php?id=<?= $value->id; ?>&acao=excluir"><button type="button" class="btn btn-danger btn-sm">Sim</button></a>
                                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Não</button>
                             </div>
                         </div>
@@ -92,7 +86,7 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
             foreach ($dados as $key => $value)
             ?>
             <div class="col-sm-12">
-                <form action="../controller/estoque.php" method="POST">
+                <form action="../controller/cadastro.php" method="POST">
                     <div class="row">
                         <div class="col-md-7">
                             <div class="form-group">
@@ -111,17 +105,17 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Tipo de Serviço</label>
-                                <select class="form-control" name="servico" id="servico" onchange="document.getElementById('preco').value = this.value;">
-                                    <option selected disabled> Selecione um Serviço</option>
-                                    <option name="corte" id="corte" value="9900">Corte</option>
-                                    <option name="barba" id="barba" value="barba">Barba</option>
-                                    <option id="corte_barba" value="corte_barba">Corte + Barba</option>
-                                    <option id="luzes" value="luzes">Luzes</option>
-                                    <option id="hidratacao" value="hidratacao">Hidratação</option>
+                                <select class="form-control" name="servico" id="servico" onchange="document.getElementById('preco').value = this.value;"required>
+                                    <option selected style="display:none"><?= $value->servico; ?></option>
+                                    <option name="corte" id="corte" value="<?= $value->servico = 'R$: 30,00  |  Corte'; ?>">Corte</option>
+                                    <option name="barba" id="barba" value="<?= $value->servico = 'R$: 40,00  | Barba'; ?>">Barba</option>
+                                    <option id="corte_barba" value="<?= $value->servico = 'R$: 50,00  |  Corte + Barba'; ?>">Corte + Barba</option>
+                                    <option id="luzes" value="<?= $value->servico = 'R$: 60,00  |  Luzes'; ?>">Luzes</option>
+                                    <option id="hidratacao" value="<?= $value->servico = 'R$: 80,00  |  Hidratação'; ?>">Hidratação</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Preço</label>
                                 <input id="preco" class="form-control money" type="text" readonly>
@@ -132,15 +126,15 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Barbeiro</label>
-                                <select class="form-control" name="status" id="status">
-                                    <option name="status" id="status" selected style="display:none"><?= $value->barbeiro; ?></option>
-                                    <option name="status" id="status" value="<?= $value->barbeiro = 'OK'; ?>">Patrick</option>
-                                    <option name="status" id="status" value="<?= $value->barbeiro = 'Em Falta'; ?>">João</option>
+                                <select class="form-control" name="barbeiro" id="barbeiro"required>
+                                    <option name="barbeiro" id="barbeiro" selected style="display:none"><?= $value->barbeiro; ?></option>
+                                    <option name="barbeiro" id="barbeiro" value="<?= $value->barbeiro = 'Patrick'; ?>">Patrick</option>
+                                    <option name="barbeiro" id="barbeiro" value="<?= $value->barbeiro = 'João'; ?>">João</option>
                                 </select>
                                 <!--<input type="text" class="form-control" name="status" id="status" value="">-->
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Horário</label>
                                 <input type="text" class="form-control horario" name="horario" id="horario" value="<?= $value->horario; ?>">
@@ -159,7 +153,7 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>status</label>
+                                <label>Status</label>
                                 <select class="form-control" name="status" id="status">
                                     <option name="status" id="status" selected style="display:none"><?= $value->status; ?></option>
                                     <option name="status" id="status" value="<?= $value->status = 'agendado'; ?>">Agendado</option>
@@ -172,13 +166,13 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Criado Em</label>
+                                <label>Data de Criação</label>
                                 <input type="text" class="form-control" name="created_at" id="created_at" value="<?= $value->created_at; ?>" readonly>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Alterado Em</label>
+                                <label>Data da Última Modificação</label>
                                 <input type="text" class="form-control" name="update_at" id="update_at" value="<?= $value->update_at; ?>" readonly>
                             </div>
                         </div>
@@ -203,7 +197,7 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
                             <?php
                             }
                             ?>
-                            <a href="../../estoque.php" class="btn btn-danger">Cancelar</a>
+                            <a href="../../cadastro.php" class="btn btn-danger">Cancelar</a>
                         </div>
                     </div>
                 </form>
@@ -215,13 +209,6 @@ include_once("/xampp/htdocs/Shakers/pages/functions/php/functions.php")
     ?>
     <script src="../../functions/js/functions.js">
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-
-    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/build/jquery.datetimepicker.full.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/jquery.datetimepicker.min.css">
 </body>
 
 </html>

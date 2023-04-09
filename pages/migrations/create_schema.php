@@ -7,7 +7,7 @@ class Migration
         try {
             $pdo = new PDO("mysql:host=localhost", "root", "");
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $slqCreateSchema = 'CREATE SCHEMA SHAKERS CHARACTER SET utf8 COLLATE utf8_unicode_ci';
+            $slqCreateSchema = 'CREATE SCHEMA BARBEARIA CHARACTER SET utf8 COLLATE utf8_unicode_ci';
             $stmt = $pdo->prepare($slqCreateSchema);
             $stmt->execute();
         } catch (PDOException $e) {

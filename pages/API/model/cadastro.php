@@ -1,61 +1,45 @@
 <?php
 
-class Estoque
+class Cadastro
 {
-    private $id, $name, $categoria, $quantidade, $indisponiveis, $status,
-        $texto, $preco, $precoMedio, $fornecedor, $created_at, $update_at;
+    private $id, $nome, $telefone, $servico, $barbeiro, $horario,
+        $texto, $status, $created_at, $update_at;
     public $conectar;
 
     public function __construct()
     {
         try {
-            $this->conectar = new PDO("mysql:host=localhost;dbname=SHAKERS", "root", "");
+            $this->conectar = new PDO("mysql:host=localhost;dbname=BARBEARIA", "root", "");
             $this->conectar->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             //echo 'Error: ' . $e->getMessage();
-            header('location: ./migrations/index.php');
+            header('location: /barbearia/pages/migrations/index.php');
         }
     }
     public function adicionarCliente(
-        $name,
-        $categoria,
-        $quantidade,
-        $indisponiveis,
-        $status,
-        $texto,
-        $preco,
-        $precoMedio,
-        $fornecedor,
+        $nome, $telefone, $servico, $barbeiro, $horario,
+        $texto, $status,
         $created_at
     ) {
         $this->dadosCadastrar(
-            $name,
-            $categoria,
-            $quantidade,
-            $indisponiveis,
-            $status,
-            $texto,
-            $preco,
-            $precoMedio,
-            $fornecedor,
+            $nome, $telefone, $servico, $barbeiro, $horario,
+        $texto, $status,
             $created_at
         );
         try {
             $stmt = $this->conectar->prepare(
-                'INSERT INTO estoque (name, categoria, quantidade, indisponiveis, status, texto, preco, precoMedio, fornecedor, created_at) 
-                VALUES (:NOME, :CATEGORIA, :QUANTIDADE, :INDISPONIVEL, :STATUS, :TEXTO, :PRECO, :PRECOMEDIO, :FORNECEDOR, :CRIADO_POR)'
+                'INSERT INTO cadastro (nome, telefone, servico, barbeiro, horario, texto, status, created_at) 
+                VALUES (:NOME, :TELEFONE, :SERVICO, :BARBEIRO, :HORARIO, :TEXTO, :STATUS, :CRIADO_POR)'
             );
             $stmt->execute(
                 array(
-                    ":NOME" => $this->getname(),
-                    ":CATEGORIA" => $this->getcategoria(),
-                    ":QUANTIDADE" => $this->getquantidade(),
-                    ":INDISPONIVEL" => $this->getindisponiveis(),
-                    ":STATUS" => $this->getstatus(),
+                    ":NOME" => $this->getnome(),
+                    ":TELEFONE" => $this->gettelefone(),
+                    ":SERVICO" => $this->getservico(),
+                    ":BARBEIRO" => $this->getbarbeiro(),
+                    ":HORARIO" => $this->gethorario(),
                     ":TEXTO" => $this->gettexto(),
-                    ":PRECO" => $this->getpreco(),
-                    ":PRECOMEDIO" => $this->getprecoMedio(),
-                    ":FORNECEDOR" => $this->getfornecedor(),
+                    ":STATUS" => $this->getstatus(),
                     ":CRIADO_POR" => $this->getcreated_at()
                 )
             );
@@ -66,95 +50,61 @@ class Estoque
         }
     }
     public function dadosCadastrar(
-        $name,
-        $categoria,
-        $quantidade,
-        $indisponiveis,
-        $status,
-        $texto,
-        $preco,
-        $precoMedio,
-        $fornecedor,
+        $nome, $telefone, $servico, $barbeiro, $horario,
+        $texto, $status,
         $created_at
     ) {
-        $this->setname($name);
-        $this->setcategoria($categoria);
-        $this->setquantidade($quantidade);
-        $this->setindisponiveis($indisponiveis);
-        $this->setstatus($status);
+        $this->setnome($nome);
+        $this->settelefone($telefone);
+        $this->setservico($servico);
+        $this->setbarbeiro($barbeiro);
+        $this->sethorario($horario);
         $this->settexto($texto);
-        $this->setpreco($preco);
-        $this->setprecoMedio($precoMedio);
-        $this->setfornecedor($fornecedor);
+        $this->setstatus($status);
         $this->setcreated_at($created_at);
     }
 
     public function dadosEditar(
-        $name,
-        $categoria,
-        $quantidade,
-        $indisponiveis,
-        $status,
-        $texto,
-        $preco,
-        $precoMedio,
-        $fornecedor,
+        $nome, $telefone, $servico, $barbeiro, $horario,
+        $texto, $status,
         $update_at
     ) {
-        $this->setname($name);
-        $this->setcategoria($categoria);
-        $this->setquantidade($quantidade);
-        $this->setindisponiveis($indisponiveis);
-        $this->setstatus($status);
+        $this->setnome($nome);
+        $this->settelefone($telefone);
+        $this->setservico($servico);
+        $this->setbarbeiro($barbeiro);
+        $this->sethorario($horario);
         $this->settexto($texto);
-        $this->setpreco($preco);
-        $this->setprecoMedio($precoMedio);
-        $this->setfornecedor($fornecedor);
+        $this->setstatus($status);
         $this->setupdate_at($update_at);
     }
 
     public function editarCliente(
         $id,
-        $name,
-        $categoria,
-        $quantidade,
-        $indisponiveis,
-        $status,
-        $texto,
-        $preco,
-        $precoMedio,
-        $fornecedor,
+        $nome, $telefone, $servico, $barbeiro, $horario,
+        $texto, $status,
         $update_at
     ) {
         $this->setid($id);
         $this->dadosEditar(
-            $name,
-            $categoria,
-            $quantidade,
-            $indisponiveis,
-            $status,
-            $texto,
-            $preco,
-            $precoMedio,
-            $fornecedor,
+            $nome, $telefone, $servico, $barbeiro, $horario,
+        $texto, $status,
             $update_at
         );
         try {
             $stmt = $this->conectar->prepare(
-                'UPDATE estoque SET name=:NOME, categoria=:CATEGORIA, quantidade=:QUANTIDADE, indisponiveis=:INDISPONIVEL, 
-                status=:STATUS, texto=:TEXTO, preco=:PRECO, precoMedio=:PRECOMEDIO, fornecedor=:FORNECEDOR, update_at=:ALTERADO_POR WHERE id=:ID'
+                'UPDATE cadastro SET nome=:NOME, telefone=:TELEFONE, servico=:SERVICO, barbeiro=:BARBEIRO, 
+                horario=:HORARIO, texto=:TEXTO, status=:STATUS, update_at=:ALTERADO_POR WHERE id=:ID'
             );
             $stmt->execute(array(
                 ":ID" => $this->id,
-                ":NOME" => $this->getname(),
-                ":CATEGORIA" => $this->getcategoria(),
-                ":QUANTIDADE" => $this->getquantidade(),
-                ":INDISPONIVEL" => $this->getindisponiveis(),
-                ":STATUS" => $this->getstatus(),
+                ":NOME" => $this->getnome(),
+                ":TELEFONE" => $this->gettelefone(),
+                ":SERVICO" => $this->getservico(),
+                ":BARBEIRO" => $this->getbarbeiro(),
+                ":HORARIO" => $this->gethorario(),
                 ":TEXTO" => $this->gettexto(),
-                ":PRECO" => $this->getpreco(),
-                ":PRECOMEDIO" => $this->getprecoMedio(),
-                ":FORNECEDOR" => $this->getfornecedor(),
+                ":STATUS" => $this->getstatus(),
                 ":ALTERADO_POR" => $this->getupdate_at()
             ));
             return 1;
@@ -166,7 +116,7 @@ class Estoque
     {
         $this->setid($id);
         try {
-            $stmt = $this->conectar->prepare('DELETE FROM estoque where id = :ID');
+            $stmt = $this->conectar->prepare('DELETE FROM cadastro where id = :ID');
             $stmt->execute(array(":ID" => $this->id));
             $retorno = $stmt->rowCount();
             return $retorno;
@@ -176,7 +126,7 @@ class Estoque
     }
     public function listarTodosClientes()
     {
-        $stmt = $this->conectar->prepare('SELECT * FROM estoque ORDER BY name ASC');
+        $stmt = $this->conectar->prepare('SELECT * FROM cadastro ORDER BY nome ASC');
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($results);
@@ -184,7 +134,7 @@ class Estoque
     public function carregarCliente($id)
     {
         $this->setid($id);
-        $stmt = $this->conectar->prepare('SELECT * FROM estoque where id = :ID ORDER BY name ASC');
+        $stmt = $this->conectar->prepare('SELECT * FROM cadastro where id = :ID ORDER BY nome ASC');
         $stmt->execute(array(":ID" => $this->id));
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($results);
@@ -194,41 +144,33 @@ class Estoque
     {
         $this->id = $id;
     }
-    private function setname($name)
+    private function setnome($nome)
     {
-        $this->name = $name;
+        $this->nome = $nome;
     }
-    private function setcategoria($categoria)
+    private function settelefone($telefone)
     {
-        $this->categoria = $categoria;
+        $this->telefone = $telefone;
     }
-    private function setquantidade($quantidade)
+    private function setservico($servico)
     {
-        $this->quantidade = $quantidade;
+        $this->servico = $servico;
     }
-    private function setindisponiveis($indisponiveis)
+    private function setbarbeiro($barbeiro)
     {
-        $this->indisponiveis = $indisponiveis;
+        $this->barbeiro = $barbeiro;
     }
-    private function setstatus($status)
+    private function sethorario($horario)
     {
-        $this->status = $status;
+        $this->horario = $horario;
     }
     private function settexto($texto)
     {
         $this->texto = $texto;
     }
-    private function setpreco($preco)
+    private function setstatus($status)
     {
-        $this->preco = preg_replace("/[^0-9]/", "",$preco)/100;
-    }
-    private function setprecoMedio($precoMedio)
-    {
-        $this->precoMedio = preg_replace("/[^0-9]/", "",$precoMedio)/100;
-    }
-    private function setfornecedor($fornecedor)
-    {
-        $this->fornecedor = $fornecedor;
+        $this->status = $status;
     }
     private function setcreated_at($created_at)
     {
@@ -243,41 +185,33 @@ class Estoque
     {
         return $this->id;
     }
-    public function getname()
+    public function getnome()
     {
-        return $this->name;
+        return $this->nome;
     }
-    public function getcategoria()
+    public function gettelefone()
     {
-        return $this->categoria;
+        return $this->telefone;
     }
-    public function getquantidade()
+    public function getservico()
     {
-        return $this->quantidade;
+        return $this->servico;
     }
-    public function getindisponiveis()
+    public function getbarbeiro()
     {
-        return $this->indisponiveis;
+        return $this->barbeiro;
     }
-    public function getstatus()
+    public function gethorario()
     {
-        return $this->status;
+        return $this->horario;
     }
     public function gettexto()
     {
         return $this->texto;
     }
-    public function getpreco()
+    public function getstatus()
     {
-        return $this->preco;
-    }
-    public function getprecoMedio()
-    {
-        return $this->precoMedio;
-    }
-    public function getfornecedor()
-    {
-        return $this->fornecedor;
+        return $this->status;
     }
     public function getcreated_at()
     {
