@@ -9,6 +9,9 @@ include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php")
     <?php
     headFormulario();
     ?>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css">
+    <link rel="stylesheet" href="/pages/CSS/style.css">
 </head>
 
 <body>
@@ -207,8 +210,10 @@ include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php")
     <?php
     rodapeFormulario();
     ?>
-    <script src="../../functions/js/functions.js">
-    </script>
+    <script src="/pages/functions/js/mascaras.js"></script>
+    <script src="/pages/functions/js/functions.js"></script>
+    <script src="/pages/functions/js/datatimepicker.js"></script>
+    
 </body>
 
 </html>
