@@ -1,5 +1,5 @@
 
-function pad(valor) { // completa com zeros à esquerda, caso necessário
+/*function pad(valor) { // completa com zeros à esquerda, caso necessário
   return valor.toString().padStart(2, '0');
 }
 
@@ -42,7 +42,7 @@ $(function () {
       return [(day != 0 && day != 1)];
     }
   });
-});
+});*/
 //função do menu lateral 
 $(function menu() {
   var menu_width = 290;

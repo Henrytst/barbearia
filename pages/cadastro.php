@@ -1,6 +1,7 @@
 <?php
-include_once("../pages/functions/php/functions.php")
+include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php")
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -8,8 +9,9 @@ include_once("../pages/functions/php/functions.php")
 
 <head>
     <?php
-    head();
+    head();  
     ?>
+    
 </head>
 
 <body>
@@ -154,6 +156,9 @@ include_once("../pages/functions/php/functions.php")
     <?php
     rodape();
     ?>
+    <script src="/pages/functions/js/mascaras.js"></script>
+    <script src="/pages/functions/js/functions.js"></script>
+    <script src="/pages/functions/js/datatimepicker.js"></script>
 </body>
 
 </html>

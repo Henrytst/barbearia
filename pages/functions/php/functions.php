@@ -8,13 +8,13 @@ function head()
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="/pages/CSS/style.css">"
+    <link rel="stylesheet" href="/pages/CSS/style.css">
 <?php
 }
 
-function menu()
-{
-    include('\Xampp\htdocs\barbearia\pages\protect.php');
+function menu(){
+    
+   include('/xampp/htdocs/barbearia/pages/protect.php');
 ?>      <div class="container-menu">
         <a href="#" class="menu-open">Menu</a>
         </div>
@@ -24,7 +24,7 @@ function menu()
         <a href="#" class="menu-close">&times;</a> 
         <ul id="ulMenu">
             <li>
-                <a href="cadastro.php" class="linkMenu">Início</a>
+                <a href="/pages/cadastro.php" class="linkMenu">Início</a>
             </li>
             <li>
                 <a href="cadastro.php" class="linkMenu">Cadastro</a>
@@ -67,7 +67,7 @@ function rodape()
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
     <script type="text/javascript" src="/pages/functions/js/jquerymask/dist/jquery.mask.min.js"></script>
     <script type="text/javascript" src="/pages/functions/js/mascaras.js"></script>
-    <script src="/pages/functions/js/functions.js"></script>
+    
 <?php
 }
 

@@ -15,7 +15,6 @@ include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php")
 </head>
 
 <body>
-
     <?php
     menu();
     ?>
