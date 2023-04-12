@@ -30,7 +30,7 @@ campo.addEventListener('invalid', () => {
 
 
 
-
+*/
 $(function () {
   jQuery.datetimepicker.setLocale('pt-BR');
   $('.horario').datetimepicker({
@@ -42,7 +42,7 @@ $(function () {
       return [(day != 0 && day != 1)];
     }
   });
-});*/
+});
 //função do menu lateral
 $(function menu() {
   var menu_width = 290;
@@ -53,13 +53,13 @@ $(function menu() {
  
   menu_open.click(function (e) {
     e.preventDefault();
-    menu.css({"right": "0px"});
+    menu.css({"left": "0px"});
     overlay.css({"opacity": "1", "width": "100%"});
   });
   
   menu_close.click(function (e) {
     e.preventDefault();
-    menu.css({"right": "-" + menu_width + "px"});
+    menu.css({"left": "-" + menu_width + "px"});
     overlay.css({"opacity": "0", "width": "0"});
   });
  });

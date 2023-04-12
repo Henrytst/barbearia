@@ -9,7 +9,7 @@ body {
     font-family: sans-serif;
 }
 
-footer{
+footer {
     margin-bottom: 50px;
 }
 
@@ -17,24 +17,24 @@ footer{
     background-color: #2a1e47;
 }
 
-.container-image{ 
+.container-image {
     width: 300px;
-    height: 300px; 
+    height: 300px;
     object-fit: cover;
     overflow: hidden;
     background-image: url('../arquivos/sem_imagem/sem_foto.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
- }
+}
 
- .centralize-image{
+.centralize-image {
     position: absolute;
     top: 50%;
     left: 50%;
     margin-top: -150px;
     margin-left: -150px;
- }
+}
 
 .telaLogin {
     width: 350px;
@@ -44,12 +44,11 @@ footer{
     background-color: rgb(255, 255, 255);
     color: #2a1e47;
     font-weight: bold;
-
 }
 
 .linkMenu {
     text-decoration: none;
-    font-weight:bolder;
+    font-weight: bolder;
     display: block;
     padding: 20px 30px;
     color: rgb(233, 230, 230);
@@ -62,52 +61,86 @@ footer{
     transform: translateX(300px);
 }
 
-.container-menu{
-    background: #900;
-    display: flex;
+.container-menu {
+    background: rgba(0, 0, 0, 0.7);
+    display: absolute;
+    background-size: 100%;
+    margin: 0;
 }
 
 /* estilizando a div orverlay */
 .overlay {
-    height: 100vh; /* deixando o overlay 100% na vertical */
+    height: 100vh;
+    /* deixando o overlay 100% na vertical */
     width: 0;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,.7);
-    opacity: 0; /*iniciando opacidade em 0 */
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    /*iniciando opacidade em 0 */
     transition: opacity 1s;
-   }
-   
-   /* estilizando o botão abrir menu */
-   .menu-open{
+}
+
+/* estilizando o botão abrir menu */
+.menu-open {
     position: relative;
     top: 0;
-    background: rgb(177, 46, 46);
+    background: rgb(11, 49, 177);
     color: #fff;
-    font-size: 15px;
+    font-size: 17px;
     text-decoration: none;
     border-radius: 10px;
-    padding: 10px 20px;
+    padding: 10px 30px;
     margin: 20px;
     display: inline-block;
     text-transform: uppercase;
-   }
-   
-   .menu {
+    font-weight: bolder;
+}
+
+.sair {
+    position: relative;
+    top: 0;
+    background: brown;
+    color: #fff;
+    font-size: 17px;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 10px 30px;
+    margin: 20px;
+    float: right;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
+.menu-open:hover {
+    background: rgb(2, 25, 99);
+    text-decoration: none;
+    color: #fff;
+}
+
+.sair:hover {
+    background: rgb(194, 20, 20);
+    text-decoration: none;
+    color: #fff;
+}
+
+.menu {
     overflow: hidden;
-    background: rgba(0,0,0,.95);
-    padding: 40px 0 0 40px;
+    background: rgb(0, 0, 0);
+    padding: 40px 0 0 0;
     position: fixed;
     top: 0;
-    right: -290px; /*iniciando o menu com menos 290px para fora do browser*/
+    right: -290px;
+    /*iniciando o menu com menos 290px para fora do browser*/
     height: 100%;
     z-index: 2;
     transition: 0.5s;
     width: 250px;
 }
 
-.ulMenu {
+#ulMenu {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -116,26 +149,27 @@ footer{
     height: 95%;
 }
 
-   /* estilizando o botão fechar menu */
-   .menu a.menu-close {
-    padding: 8px 0 4px 23px;
+/* estilizando o botão fechar menu */
+.menu a.menu-close {
+    padding: 8px 0 4px 200px;
     color: #6B6B6B;
     display: block;
     margin: -30px 0 -10px -20px;
-    font-size: 35px;
-    text-decoration: none;
-   }
-   
-   /* estilizando o menu + ul li + a */
+    font-size: 40px;
+}
+
+/* estilizando o menu + ul li + a */
 .menu ul li a {
     display: block;
     border-bottom: 1px solid #131313;
-    padding: 6px 4px 6px 4px;
     color: #989898;
     transition: 0.3s;
-    text-decoration: none;
-   }
+    list-style: none;
+}
 
+ul {
+    margin-left: -50px;
+}
 
 .centralize-image {
     width: 40px;
@@ -146,22 +180,26 @@ footer{
 }
 
 .linkMenu:hover {
-    background-color: #900;;
+    background-color: rgb(153, 152, 152);
+    ;
     color: rgb(255, 255, 255);
     text-decoration: none;
 }
+
 #labelMenu {
     padding: 15px;
     position: absolute;
     z-index: 2;
 }
 
-.sair {
-    margin-top: 100%;
+.acoes{
+    margin: 5px;
 }
 
-.sair:hover {
-    background-color: brown;
-    font-size: larger;
+@media(max-width: 780px) {
+    .ordenacao, .nome, .acoes {
+        display: none;
+        margin: auto;
+        padding: 0;
+    }
 }
-
