@@ -43,7 +43,7 @@ $(function () {
     }
   });
 });*/
-//função do menu lateral 
+//função do menu lateral
 $(function menu() {
   var menu_width = 290;
   var menu = $(".menu");
