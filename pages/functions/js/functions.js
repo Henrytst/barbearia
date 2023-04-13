@@ -35,8 +35,8 @@ campo.addEventListener('invalid', () => {
 */
 $(function () {
   $.datetimepicker.setLocale('pt-BR');
-  $('.horario').datetimepicker({
-    mask:'00/00/0000',
+  $('.botaoHorario').datetimepicker({
+    //mask:'00/00/0000',
     format: 'd/m/Y H:i',
     minDate: 0,
     allowTimes: ['10:00', '10:30', '11:00', '11:30', '12:00',
