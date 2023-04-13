@@ -9,9 +9,9 @@ include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php")
 
 <head>
     <?php
-    head();  
+    head();
     ?>
-    
+
 </head>
 
 <body>
@@ -87,12 +87,12 @@ include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php")
                     <table class="table table-striped" id="table_id">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Serviço</th>
+                                <th scope="col" class="ordenacao">#</th>
+                                <th scope="col" class="nome">Nome</th>
+                                <th scope="col" class="servico">Serviço</th>
                                 <th scope="col">Agendamento</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">AÇÕES</th>
+                                <th scope="col" class="acoes">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,16 +100,19 @@ include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php")
                             $i = 1;
                             foreach ($dados as $key => $value) {
                             ?>
-                                <tr>
-                                    <th scope="row"><?= $i++; ?></td>
-                                    <td><?= substr_replace($value->nome, (strlen($value->nome) > 30 ? '...' : ''),30);?></td>
-                                    <td><?= substr_replace($value->servico, (strlen($value->servico) > 30 ? '...' : ''),30); ?></td>
-                                    <td><?= $value->horario; ?></td>
-                                    <td><?= $value->status; ?></td>
-                                    <td><a href="./API/views/cadastro.php?id=<?= $value->id; ?>&acao=buscar"><button type="button" class="btn btn-warning btn-sm">Visualizar/Editar</button></a>
-                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#excluir<?= $value->id; ?>">Excluir</button>
-                                    </td>
-                                </tr>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <tr>
+                                            <td class="ordenacao"><?= $i++; ?></td>
+                                            <td class="nome"><?= substr_replace($value->nome, (strlen($value->nome) > 30 ? '...' : ''), 30); ?></td>
+                                            <td class="servico"><?= substr_replace($value->servico, (strlen($value->servico) > 30 ? '...' : ''), 30); ?></td>
+                                            <td><?= $value->horario; ?></td>
+                                            <td><?= $value->status; ?></td>
+                                            <td><a href="./API/views/cadastro.php?id=<?= $value->id; ?>&acao=buscar"><button type="button" class="btn btn-warning btn-sm acoes">Visualizar/Editar</button></a>
+                                        <button type="button" class="btn btn-danger btn-sm acoes" data-toggle="modal" data-target="#excluir<?= $value->id; ?>">Excluir</button></td>
+                                        </tr>
+                                    </div>
+                                </div>
                                 <!-- Modal -->
                                 <div class="modal fade" id="excluir<?= $value->id; ?>" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -156,9 +159,6 @@ include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php")
     <?php
     rodape();
     ?>
-    <script src="/pages/functions/js/mascaras.js"></script>
-    <script src="/pages/functions/js/functions.js"></script>
-    <script src="/pages/functions/js/datatimepicker.js"></script>
 </body>
 
 </html>
