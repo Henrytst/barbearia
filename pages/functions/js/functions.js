@@ -1,4 +1,6 @@
 
+
+
 /*function pad(valor) { // completa com zeros à esquerda, caso necessário
   return valor.toString().padStart(2, '0');
 }
@@ -32,9 +34,13 @@ campo.addEventListener('invalid', () => {
 
 */
 $(function () {
-  jQuery.datetimepicker.setLocale('pt-BR');
+  $.datetimepicker.setLocale('pt');
   $('.horario').datetimepicker({
+    mask:'00/00/0000 00:00',
     format: 'd/m/Y H:i',
+
+    startDate:new Date(),
+
     minDate:0,
     defaultTime:'10:00',
     allowTimes: ['10:00', '10:30', '11:00', '11:30', '12:00',

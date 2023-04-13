@@ -64,9 +64,11 @@ function rodape()
     </script>
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+
     <script type="text/javascript" src="/barbearia/pages/functions/js/jquerymask/dist/jquery.mask.min.js"></script>
     <script src="/barbearia/pages/functions/js/mascaras.js"></script>
     <script src="/barbearia/pages/functions/js/functions.js"></script>
+
 
 <?php
 }
@@ -94,10 +96,12 @@ function rodapeFormulario()
     <!-- Adicionando JQuery -->
     <script src="/barbearia/pages/functions/js/jquery.js"></script>
     <!-- Adicionando Javascript -->
+
     <script type="text/javascript" src="/barbearia/pages/functions/js/jquerymask/dist/jquery.mask.min.js"></script>
     <script src="/barbearia/pages/functions/js/mascaras.js"></script>
     <script src="/barbearia/pages/functions/js/functions.js"></script>
     <script src="/barbearia/pages/functions/js/datatimepicker.js"></script>
+
     <!-- Adicionando Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
