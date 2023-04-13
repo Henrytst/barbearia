@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', function () {
   campo.max = formata(data);
 });
 
-// mensagens de validação
+/*// mensagens de validação
 campo.addEventListener('input', () => {
   campo.setCustomValidity('');
   campo.checkValidity();
@@ -26,7 +26,7 @@ campo.addEventListener('input', () => {
 // se tentar submeter o form com data fora do intervalo, mostra o erro
 campo.addEventListener('invalid', () => {
   campo.setCustomValidity('A data deve estar entre hoje e 2 anos à frente');
-});
+});*/
 
 
 
