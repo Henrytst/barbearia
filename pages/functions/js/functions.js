@@ -1,9 +1,46 @@
+
+
+
+/*function pad(valor) { // completa com zeros à esquerda, caso necessário
+  return valor.toString().padStart(2, '0');
+}
+
+function formata(data) {
+  return `${data.getFullYear()}-${pad(data.getMonth() + 1)}-${pad(data.getDate())}`;
+}
+
+const campo = document.querySelector('#horario');
+
+window.addEventListener('DOMContentLoaded', function () {
+  var data = new Date(); // data de hoje
+  campo.min = formata(data);
+  // 2 anos à frente
+  data.setFullYear(data.getFullYear() + 2);
+  campo.max = formata(data);
+});
+
+// mensagens de validação
+campo.addEventListener('input', () => {
+  campo.setCustomValidity('');
+  campo.checkValidity();
+});
+
+// se tentar submeter o form com data fora do intervalo, mostra o erro
+campo.addEventListener('invalid', () => {
+  campo.setCustomValidity('A data deve estar entre hoje e 2 anos à frente');
+});
+
+
+
+*/
 $(function () {
   $.datetimepicker.setLocale('pt');
   $('.horario').datetimepicker({
     mask:'00/00/0000 00:00',
     format: 'd/m/Y H:i',
+
     startDate:new Date(),
+
     minDate:0,
     defaultTime:'10:00',
     allowTimes: ['10:00', '10:30', '11:00', '11:30', '12:00',
