@@ -34,21 +34,18 @@ campo.addEventListener('invalid', () => {
 
 */
 $(function () {
-  $.datetimepicker.setLocale('pt');
+  $.datetimepicker.setLocale('pt-BR');
   $('.horario').datetimepicker({
-    mask:'00/00/0000 00:00',
+    mask:'00/00/0000',
     format: 'd/m/Y H:i',
-
-    startDate:new Date(),
-
-    minDate:0,
-    defaultTime:'10:00',
+    minDate: 0,
     allowTimes: ['10:00', '10:30', '11:00', '11:30', '12:00',
       '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30'],
+      defaultTime:'10:00',
     beforeShowDay: function (date) {
       var day = date.getDay();
       return [(day != 0 && day != 1)];
-    }
+    },
     /*Quando o barbeiro quiser pausar em certas datas*/
     /*disabledDates: [
       moment("2023/04/21"),
