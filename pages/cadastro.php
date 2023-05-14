@@ -125,7 +125,7 @@ include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php")
                                             </div>
                                             <div class="modal-body">
                                                 Deseja realmente excluir do cadastro
-                                                <b><?= $value->name; ?>?</b>
+                                                <b><?= $value->nome; ?>?</b>
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="./API/controller/cadastro.php?id=<?= $value->id; ?>&acao=excluir"><button type="button" class="btn btn-danger btn-sm">Sim</button></a>

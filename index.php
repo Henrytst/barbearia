@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="/pages/CSS/style.css">
+    <link rel="stylesheet" href="/pages/CSS/login.css">
 
     <title>Tela de Login</title>
 </head>
@@ -78,24 +78,24 @@
     senha: <input type="password" name="senha">
     <input type="submit">
     </form>-->
-    <div class="col-sm-12">
+    <div class="container">
         <form method="post">
-            <div class="d-flex justify-content-center">
-                <div class="card telaLogin">
-                    <div class="card-body">
-                        <div class="col-md-15">
+            <div class="row">
+                <div class="col-md-offset-5 col-md-4 text-center">
+                    <div class="form-login">
+                        <!--<div class="col-md-15">-->
                             <label for="exampleInputEmail1">Usuário</label>
-                            <input type="text" name="email" class="form-control" id="exampleInputEmail1" placeholder="Digite seu Usuário" aria-describedby="emailHelp">
-                            <div class="col-md-15">
+                            <input type="text" name="email" class="form-control input-sm chat-input" id="exampleInputEmail1" placeholder="Digite seu Usuário" aria-describedby="emailHelp">
+                            <!--<div class="col-md-15">-->
                                 <br>
                                 <label for="exampleInputPassword1">Senha</label>
-                                <input type="password" name="senha" class="form-control" id="exampleInputPassword1" placeholder="Digite sua Senha">
-                            </div>
+                                <input type="password" name="senha" class="form-control input-sm chat-input" id="exampleInputPassword1" placeholder="Digite sua Senha">
+                            <!--</div>-->
                             <br>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-outline-dark btn-block">Acessar</button>
                             </div>
-                        </div>
+                        <!--</div>-->
                     </div>
                 </div>
             </div>

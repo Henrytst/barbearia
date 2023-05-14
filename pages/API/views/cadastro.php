@@ -1,5 +1,5 @@
 <?php
-include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php")
+include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php");
 ?>
 
 <!DOCTYPE html>
@@ -104,7 +104,7 @@ include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php")
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Tipo de Serviço</label>
-                                <select class="form-control" name="servico" id="servico" onchange="document.getElementById('preco').value = this.value;"required>
+                                <select class="form-control" name="servico" id="servico" onchange="document.getElementById('preco').value = this.value;" required>
                                     <option selected style="display:none"><?= $value->servico; ?></option>
                                     <option name="corte" id="corte" value="<?= $value->servico = 'R$: 30,00  |  Corte'; ?>">Corte</option>
                                     <option name="barba" id="barba" value="<?= $value->servico = 'R$: 40,00  | Barba'; ?>">Barba</option>
@@ -125,7 +125,7 @@ include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php")
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Barbeiro</label>
-                                <select class="form-control" name="barbeiro" id="barbeiro"required>
+                                <select class="form-control" name="barbeiro" id="barbeiro" required>
                                     <option name="barbeiro" id="barbeiro" selected style="display:none"><?= $value->barbeiro; ?></option>
                                     <option name="barbeiro" id="barbeiro" value="<?= $value->barbeiro = 'Patrick'; ?>">Patrick</option>
                                     <option name="barbeiro" id="barbeiro" value="<?= $value->barbeiro = 'João'; ?>">João</option>
@@ -136,7 +136,8 @@ include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php")
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Horário</label>
-                                <input type="text" class="form-control horario" name="horario" id="horario" value="<?= $value->horario; ?>">
+                                <input type="button" class="form-control btn btn-outline-dark botaoHorario" name="botaoHorario" id="botaoHorario" value="<?= $value->horario; ?>" onchange="document.getElementById('horario').value = this.value;" required>
+                                <input type="text" class="form-control" style="opacity:0;" name="horario" id="horario"onchange="consulta()" value="<?= $value->horario; ?>" required>
                             </div>
                         </div>
                     </div>
@@ -191,7 +192,7 @@ include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php")
                             <?php
                             } else {
                             ?>
-                                <button type="submit" class="btn btn-success">Cadastrar</button>
+                                <button type="submit" class="btn btn-success" name="sub">Cadastrar</button>
                                 <button type="reset" class="btn btn-warning">Limpar</button>
                             <?php
                             }
@@ -207,7 +208,7 @@ include_once("/Xampp/htdocs/barbearia/pages/functions/php/functions.php")
     <?php
     rodapeFormulario();
     ?>
-    
+
 </body>
 
 </html>
