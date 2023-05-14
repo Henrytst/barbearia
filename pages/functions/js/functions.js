@@ -38,7 +38,15 @@ $(function () {
   $('.botaoHorario').datetimepicker({
     //mask:'00/00/0000',
     format: 'd/m/Y H:i',
+<<<<<<< HEAD
     minDate: 0,
+=======
+
+    startDate:new Date(),
+
+    minDate:0,
+    defaultTime:'10:00',
+>>>>>>> 45fcc65d1bac5c84efe293b8a2ebdccc24bf974f
     allowTimes: ['10:00', '10:30', '11:00', '11:30', '12:00',
       '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30'],
       defaultTime:'10:00',
